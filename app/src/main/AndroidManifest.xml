@@ -18,6 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PictureDetailsActivity"
+            android:label="@string/subactivity_name"
+            android:theme="@style/Transparent"></activity>
+        <activity
+            android:name=".PictureDetailsActivity2"
+            android:label="@string/subactivity_name"
+            android:theme="@style/NoTitle">
+
+        </activity>
     </application>
 
 </manifest>
