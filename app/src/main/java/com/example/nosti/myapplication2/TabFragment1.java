@@ -28,6 +28,7 @@ public class TabFragment1 extends Fragment {
 
     private static final String PACKAGE = "com.example.nosti.mymyapplication2";
     static float sAnimatorScale = 1;
+    BitmapUtils mBitmapUtils = new BitmapUtils();
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -40,20 +41,19 @@ public class TabFragment1 extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_tab1, container, false);
         Context context = rootView.getContext();
 
-        List<ItemObject> rowListItem = getAllItemList();
 
 
         RecyclerView rView = (RecyclerView)rootView.findViewById(R.id.recycler_view);
         rView.setHasFixedSize(true);
         rView.setLayoutManager(new GridLayoutManager(context, getResources().getInteger(R.integer.column_number)));
 
-        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(context, rowListItem);
+        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(context, mBitmapUtils);
         rView.setAdapter(rcAdapter);
 
         return rootView;
     }
 
-    private List<ItemObject> getAllItemList(){
+    /*private List<ItemObject> getAllItemList(){
 
         List<ItemObject> allItems = new ArrayList<ItemObject>();
         for (int i =  0; i<10; i++) {
@@ -64,7 +64,7 @@ public class TabFragment1 extends Fragment {
 
 
         return allItems;
-    }
+    }*/
 
 
 

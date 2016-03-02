@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nosti.myapplication2">
+    package="com.example.nosti.myapplication2"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="17" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -21,7 +32,8 @@
         <activity
             android:name=".PictureDetailsActivity"
             android:label="@string/subactivity_name"
-            android:theme="@style/Transparent"></activity>
+            android:theme="@style/Transparent">
+        </activity>
         <activity
             android:name=".PictureDetailsActivity2"
             android:label="@string/subactivity_name"

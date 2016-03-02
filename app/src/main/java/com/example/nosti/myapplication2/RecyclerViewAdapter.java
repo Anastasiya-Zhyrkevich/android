@@ -1,6 +1,8 @@
 package com.example.nosti.myapplication2;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +18,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     private List<ItemObject> itemList;
     private Context context;
+    private Resources resources;
 
-    public RecyclerViewAdapter(Context context, List<ItemObject> itemList) {
-        this.itemList = itemList;
+    public RecyclerViewAdapter(Context context, BitmapUtils mBitmapUtils) {
         this.context = context;
+        this.resources = context.getResources();
+        this.itemList = mBitmapUtils.loadThumbnails(this.resources);
     }
 
     @Override
@@ -32,7 +36,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
-        holder.myPhoto.setImageResource(itemList.get(position).getPhoto());
+        //holder.myPhoto.setImageResource(itemList.get(position).getThumbnail());
+
+        ItemObject pictureData = itemList.get(position);
+
+        BitmapDrawable thumbnailDrawable =
+                new BitmapDrawable(resources, pictureData.getThumbnail());
+        //thumbnailDrawable.setColorFilter(grayscaleFilter);
+
+        holder.myPhoto.setImageDrawable(thumbnailDrawable);
+        //holder.myPhoto.setOnClickListener(thumbnailClickListener);
+        holder.myPhoto.setTag(pictureData);
+
+
     }
 
     @Override
