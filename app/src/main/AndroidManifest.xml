@@ -14,14 +14,13 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".PictureDetailsActivity"
             android:label="@string/subactivity_name"
-            android:theme="@style/Transparent"></activity>
+            android:theme="@style/NoTitle"></activity>
         <activity
             android:name=".PictureDetailsActivity2"
             android:label="@string/subactivity_name"

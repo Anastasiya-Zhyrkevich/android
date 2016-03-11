@@ -8,20 +8,36 @@ import android.graphics.Bitmap;
 public class ItemObject {
 
     private String name;
-    private int photo;
     private int resourceId;
     Bitmap thumbnail;
 
-    public ItemObject(String name, int photo) {
+    public ItemObject(String name, int resourceId, Bitmap thumbnail) {
         this.name = name;
-        this.photo = photo;
+        this.thumbnail = thumbnail;
+        this.resourceId = resourceId;
     }
 
-    public int getPhoto() {
-        return photo;
+    public String getName() {
+        return name;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public Bitmap getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Bitmap thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

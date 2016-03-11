@@ -1,6 +1,7 @@
 package com.example.nosti.myapplication2;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +17,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     private List<ItemObject> itemList;
     private Context context;
+    private Resources resources;
 
-    public RecyclerViewAdapter(Context context, List<ItemObject> itemList) {
-        this.itemList = itemList;
+
+
+
+    public RecyclerViewAdapter(Context context, BitmapUtils mBitmapUtils) {
+        this.resources =
+        this.itemList = mBitmapUtils.loadThumbnails(this.resources);
         this.context = context;
+
     }
 
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_list, null);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView);
         return rcv;
