@@ -32,7 +32,7 @@
         <activity
             android:name=".PictureDetailsActivity"
             android:label="PictureInfo!"
-            android:theme="@style/NoTitle">
+            android:theme="@style/Transparent">
         </activity>
         <activity
             android:name=".PictureDetailsActivity2"

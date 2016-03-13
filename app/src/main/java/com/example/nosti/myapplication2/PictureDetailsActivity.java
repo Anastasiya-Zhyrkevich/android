@@ -60,7 +60,7 @@ public class PictureDetailsActivity extends Activity {
     float mWidthScale;
     float mHeightScale;
     private ImageView mImageView;
-    private TextView mTextView;
+    //private TextView mTextView;
     private FrameLayout mTopLevelLayout;
     private ShadowLayout mShadowLayout;
     private int mOriginalOrientation;
@@ -72,14 +72,14 @@ public class PictureDetailsActivity extends Activity {
         mImageView = (ImageView) findViewById(R.id.imageView);
         mTopLevelLayout = (FrameLayout) findViewById(R.id.topLevelLayout);
         mShadowLayout = (ShadowLayout) findViewById(R.id.shadowLayout);
-        mTextView = (TextView) findViewById(R.id.description);
+        //mTextView = (TextView) findViewById(R.id.description);
 
         // Retrieve the data we need for the picture/description to display and
         // the thumbnail to animate it from
         Bundle bundle = getIntent().getExtras();
         Bitmap bitmap = BitmapUtils.getBitmap(getResources(),
                 bundle.getInt(PACKAGE_NAME + ".resourceId"));
-        String description = bundle.getString(PACKAGE_NAME + ".description");
+        //String description = bundle.getString(PACKAGE_NAME + ".description");
         final int thumbnailTop = bundle.getInt(PACKAGE_NAME + ".top");
         final int thumbnailLeft = bundle.getInt(PACKAGE_NAME + ".left");
         final int thumbnailWidth = bundle.getInt(PACKAGE_NAME + ".width");
@@ -88,7 +88,7 @@ public class PictureDetailsActivity extends Activity {
 
         mBitmapDrawable = new BitmapDrawable(getResources(), bitmap);
         mImageView.setImageDrawable(mBitmapDrawable);
-        mTextView.setText(description);
+        //mTextView.setText(description);
 
         mBackground = new ColorDrawable(Color.BLACK);
         mTopLevelLayout.setBackground(mBackground);
@@ -142,24 +142,24 @@ public class PictureDetailsActivity extends Activity {
         mImageView.setTranslationY(mTopDelta);
 
         // We'll fade the text in later
-        mTextView.setAlpha(0);
+        //mTextView.setAlpha(0);
 
         // Animate scale and translation to go from thumbnail to full size
         mImageView.animate().setDuration(duration).
                 scaleX(1).scaleY(1).
                 translationX(0).translationY(0).
-                setInterpolator(sDecelerator).
+                setInterpolator(sDecelerator);/*.
                 withEndAction(new Runnable() {
                     public void run() {
                         // Animate the description in after the image animation
                         // is done. Slide and fade the text in from underneath
                         // the picture.
                         mTextView.setTranslationY(-mTextView.getHeight());
-                        mTextView.animate().setDuration(duration/2).
+                        mTextView.animate().setDuration(duration / 2).
                                 translationY(0).alpha(1).
                                 setInterpolator(sDecelerator);
                     }
-                });
+                });*/
 
         // Fade in the black background
         ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0, 255);
@@ -208,40 +208,42 @@ public class PictureDetailsActivity extends Activity {
             fadeOut = false;
         }
 
-        // First, slide/fade text out of the way
-        mTextView.animate().translationY(-mTextView.getHeight()).alpha(0).
+        mImageView.animate().setDuration(duration).
+                scaleX(mWidthScale).scaleY(mHeightScale).
+                translationX(mLeftDelta).translationY(mTopDelta).
+                withEndAction(endAction);
+        if (fadeOut) {
+            mImageView.animate().alpha(0);
+        }
+        // Fade out background
+        ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0);
+        bgAnim.setDuration(duration);
+        bgAnim.start();
+
+        // Animate the shadow of the image
+        ObjectAnimator shadowAnim = ObjectAnimator.ofFloat(mShadowLayout,
+                "shadowDepth", 1, 0);
+        shadowAnim.setDuration(duration);
+        shadowAnim.start();
+
+        // Animate a color filter to take the image back to grayscale,
+        // in parallel with the image scaling and moving into place.
+        ObjectAnimator colorizer =
+                ObjectAnimator.ofFloat(PictureDetailsActivity.this,
+                        "saturation", 1, 0);
+        colorizer.setDuration(duration);
+        colorizer.start();
+
+        //First, slide/fade text out of the way
+       /* mTextView.animate().translationY(-mTextView.getHeight()).alpha(0).
                 setDuration(duration/2).setInterpolator(sAccelerator).
                 withEndAction(new Runnable() {
                     public void run() {
                         // Animate image back to thumbnail size/location
-                        mImageView.animate().setDuration(duration).
-                                scaleX(mWidthScale).scaleY(mHeightScale).
-                                translationX(mLeftDelta).translationY(mTopDelta).
-                                withEndAction(endAction);
-                        if (fadeOut) {
-                            mImageView.animate().alpha(0);
-                        }
-                        // Fade out background
-                        ObjectAnimator bgAnim = ObjectAnimator.ofInt(mBackground, "alpha", 0);
-                        bgAnim.setDuration(duration);
-                        bgAnim.start();
 
-                        // Animate the shadow of the image
-                        ObjectAnimator shadowAnim = ObjectAnimator.ofFloat(mShadowLayout,
-                                "shadowDepth", 1, 0);
-                        shadowAnim.setDuration(duration);
-                        shadowAnim.start();
-
-                        // Animate a color filter to take the image back to grayscale,
-                        // in parallel with the image scaling and moving into place.
-                        ObjectAnimator colorizer =
-                                ObjectAnimator.ofFloat(PictureDetailsActivity.this,
-                                "saturation", 1, 0);
-                        colorizer.setDuration(duration);
-                        colorizer.start();
                     }
                 });
-
+        */
 
     }
 
@@ -273,7 +275,6 @@ public class PictureDetailsActivity extends Activity {
     @Override
     public void finish() {
         super.finish();
-
         // override transitions to skip the standard window animations
         overridePendingTransition(0, 0);
     }

@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -56,20 +57,11 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
             int[] screenLocation = new int[2];
             view.getLocationOnScreen(screenLocation);
             ItemObject info = (ItemObject) view.getTag();
-           if (info == null)
-           {
-               Log.d("Null pointer", "Null info");
-           }
 
             Intent subActivity = new Intent(context,
                     PictureDetailsActivity.class);
-            Log.d("BadApi", "Intent Created");
+
             int orientation = context.getResources().getConfiguration().orientation;
-            Log.d("NullPointer", String.valueOf(info.getResourceId()));
-            Log.d("NullPointer", String.valueOf(orientation));
-            Log.d("NullPointer", info.getName());
-
-
             subActivity.
                     putExtra(PACKAGE + ".orientation", orientation).
                     putExtra(PACKAGE + ".resourceId", info.getResourceId()).
@@ -83,7 +75,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
             Log.d("BadApi", "SubAct Created");
             // Override transitions: we don't want the normal window animation in addition
             // to our custom one
-            //overridePendingTransition(0, 0);
+           ((Activity)context).overridePendingTransition(0, 0);
         }
 
 
