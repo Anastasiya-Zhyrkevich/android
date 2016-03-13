@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".PictureDetailsActivity"
-            android:label="@string/subactivity_name"
+            android:label="PictureInfo!"
             android:theme="@style/NoTitle">
         </activity>
         <activity

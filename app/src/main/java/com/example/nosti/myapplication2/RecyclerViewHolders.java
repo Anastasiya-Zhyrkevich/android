@@ -34,7 +34,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
     public void onClick(View view) {
         Log.d("onClickHolder", "onClick " + getPosition());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && newApi) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && newApi) {
             Log.d("GoodApi", "1");
             ItemObject info = (ItemObject) view.getTag();
             Intent subActivity = new Intent(context,
@@ -73,6 +73,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
             // to our custom one
             //overridePendingTransition(0, 0);
         }
+        */
 
 
     }
