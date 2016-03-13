@@ -24,6 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         this.context = context;
         this.resources = context.getResources();
         this.itemList = mBitmapUtils.loadThumbnails(this.resources);
+
     }
 
     @Override
@@ -47,7 +48,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.myPhoto.setImageDrawable(thumbnailDrawable);
         //holder.myPhoto.setOnClickListener(thumbnailClickListener);
         holder.myPhoto.setTag(pictureData);
-
 
     }
 

@@ -18,6 +18,7 @@
     android:layout_height="match_parent">
 
     <view
+
         class="com.example.nosti.myapplication2.ShadowLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

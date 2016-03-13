@@ -26,8 +26,10 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
     public RecyclerViewHolders(View itemView) {
         super(itemView);
         context = itemView.getContext();
-        itemView.setOnClickListener(this);
+        //itemView.setOnClickListener(this);
         myPhoto = (ImageView)itemView.findViewById(R.id.my_photo);
+        //
+        myPhoto.setOnClickListener(this);
     }
 
     @Override
@@ -45,7 +47,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
                     ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(),
                             view.findViewById(R.id.my_photo), "image").toBundle());
             Log.d("GoodApi", "start Created");
-        } else {
+       } else {
             // Interesting data to pass across are the thumbnail size/location, the
             // resourceId of the source bitmap, the picture description, and the
             // orientation (to avoid returning back to an obsolete configuration if
@@ -54,10 +56,20 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
             int[] screenLocation = new int[2];
             view.getLocationOnScreen(screenLocation);
             ItemObject info = (ItemObject) view.getTag();
+           if (info == null)
+           {
+               Log.d("Null pointer", "Null info");
+           }
+
             Intent subActivity = new Intent(context,
                     PictureDetailsActivity.class);
             Log.d("BadApi", "Intent Created");
             int orientation = context.getResources().getConfiguration().orientation;
+            Log.d("NullPointer", String.valueOf(info.getResourceId()));
+            Log.d("NullPointer", String.valueOf(orientation));
+            Log.d("NullPointer", info.getName());
+
+
             subActivity.
                     putExtra(PACKAGE + ".orientation", orientation).
                     putExtra(PACKAGE + ".resourceId", info.getResourceId()).
@@ -73,7 +85,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
             // to our custom one
             //overridePendingTransition(0, 0);
         }
-        
+
 
 
     }
