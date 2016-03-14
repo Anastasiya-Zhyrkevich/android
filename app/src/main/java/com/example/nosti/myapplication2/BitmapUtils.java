@@ -60,7 +60,7 @@ public class BitmapUtils {
      */
     public ArrayList<ItemObject> loadThumbnails(Resources resources) {
         ArrayList<ItemObject> pictures = new ArrayList<ItemObject>();
-        for (int i = 0; i < 30; ++i) {
+        for (int i = 0; i < 10; ++i) {
             int resourceId = mPhotos[(int) (Math.random() * mPhotos.length)];
             Bitmap bitmap = getBitmap(resources, resourceId);
             Bitmap thumbnail = getThumbnail(bitmap, 200);
