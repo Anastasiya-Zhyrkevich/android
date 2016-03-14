@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 
@@ -87,8 +88,10 @@ public class BitmapUtils {
      * dimension (width or height).
      */
     private Bitmap getThumbnail(Bitmap original, int maxDimension) {
-        int width = original.getWidth();
+        /*int width = original.getWidth();
         int height = original.getHeight();
+        Log.d("width", "w" + width);
+        Log.d("height", "h" + height);
         int scaledWidth, scaledHeight;
         if (width >= height) {
             float scaleFactor = (float) maxDimension / width;
@@ -100,8 +103,24 @@ public class BitmapUtils {
             scaledHeight = 200;
         }
         Bitmap thumbnail = Bitmap.createScaledBitmap(original, scaledWidth, scaledHeight, true);
-        
-        return thumbnail;
+        Log.d("widthTh", "w" + thumbnail.getWidth());
+        Log.d("heightTh", "h" + thumbnail.getHeight());
+        return thumbnail;*/
+        return cropToSquare(original);
+    }
+
+    public static Bitmap cropToSquare(Bitmap bitmap){
+        int width  = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = (height > width) ? width : height;
+        int newHeight = (height > width)? height - ( height - width) : height;
+        int cropW = (width - height) / 2;
+        cropW = (cropW < 0)? 0: cropW;
+        int cropH = (height - width) / 2;
+        cropH = (cropH < 0)? 0: cropH;
+        Bitmap cropImg = Bitmap.createBitmap(bitmap, cropW, cropH, newWidth, newHeight);
+
+        return cropImg;
     }
     
 

@@ -29,7 +29,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
         context = itemView.getContext();
         //itemView.setOnClickListener(this);
         myPhoto = (ImageView)itemView.findViewById(R.id.my_photo);
-        //
         myPhoto.setOnClickListener(this);
     }
 
