@@ -40,6 +40,13 @@
             android:theme="@style/NoTitle">
 
         </activity>
+        <activity
+            android:name=".UserSettingActivity"
+            android:label="Settings"
+            android:theme="@style/NoTitle">
+
+        </activity>
+
     </application>
 
 </manifest>

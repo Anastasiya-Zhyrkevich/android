@@ -1,6 +1,9 @@
 package com.example.nosti.myapplication2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -54,9 +57,9 @@ public class MainActivity extends AppCompatActivity
         // Set up TabLaoyut
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        tabLayout.addTab(tabLayout.newTab().setText("Галерея"));
+        tabLayout.addTab(tabLayout.newTab().setText("ЯФотки"));
+        tabLayout.addTab(tabLayout.newTab().setText("Кэш"));
 
 
 
@@ -134,7 +137,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            Intent settingsIntent = new Intent(this, UserSettingActivity.class);
+            startActivity(settingsIntent);
+            SharedPreferences sharedPrefs = PreferenceManager
+                    .getDefaultSharedPreferences(this);
 
+            String user_name = sharedPrefs.getString("prefUsername", "NULL");
+            //sharedPrefs.getBoolean("prefSendReport", false);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -200,14 +209,16 @@ public class MainActivity extends AppCompatActivity
             Log.d("MainActivity", "Create new fragment");
             switch (position) {
                 case 0:
-                    //Log.d("MainActivity", "Create new 1 fragment");
                     TabFragment1 tab1 = new TabFragment1();
                     return tab1;
-                    //return PlaceholderFragment.newInstance(position + 1);
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    TabFragment1 tab2 = new TabFragment1();
+                    return tab2;
+                    //return PlaceholderFragment.newInstance(position + 1);
                 case 2:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    TabFragment1 tab3 = new TabFragment1();
+                    return tab3;
+                    //return PlaceholderFragment.newInstance(position + 1);
                 default:
                     return null;
             }
